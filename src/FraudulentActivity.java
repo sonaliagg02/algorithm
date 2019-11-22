@@ -6,22 +6,25 @@ public class FraudulentActivity {
 
     private static int activityNotifications(int[] expenditure, int d) {
         int noticeCount = 0;
-        for(int i = 0; i < expenditure.length - (d - 1); i++){
-            List<Integer> list = new ArrayList<>();
-            int j = i;
-            int count = 0;
-            while(count < d){
-                list.add(expenditure[j]);
-                j++;
-                count++;
-            }
-            double median = findMedian(list);
-            if(j < expenditure.length){
-                if(expenditure[j] >= 2*median){
+        List<Integer> listTest = new ArrayList<>();
+        int count = 0;
+        for(int a = 0; a < d; a++){
+            listTest.add(expenditure[a]);
+            count++;
+        }
+        double median = findMedian(listTest);
+        if (expenditure[count] >= 2 * median) {
+            noticeCount++;
+        }
+
+        for(int b = d; b < expenditure.length; b++){
+            listTest.remove(0);
+            listTest.add(expenditure[b]);
+            count++;
+            if(count < expenditure.length) {
+                if (expenditure[count] >= 2 * findMedian(listTest)) {
                     noticeCount++;
                 }
-            }else {
-                break;
             }
         }
         return noticeCount;
@@ -42,8 +45,8 @@ public class FraudulentActivity {
     }
 
     public static void main(String[] args) {
-        int[] input = {1, 2, 3, 4, 4};
-        int noticeDays = activityNotifications(input, 4);
+        int[] input = {2, 3, 4, 2, 3, 6, 8, 4, 5};
+        int noticeDays = activityNotifications(input, 5);
         System.out.println(noticeDays);
     }
 }
