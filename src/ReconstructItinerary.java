@@ -20,11 +20,15 @@ public class ReconstructItinerary {
     }
 
     private static void performDFS(String start, List<String> result, Map<String, PriorityQueue<String>> map){
-        PriorityQueue<String> queue = map.get(start);
-        while (queue != null && !queue.isEmpty()) {
-            performDFS(queue.poll(), result, map);
+        Stack<String> stack = new Stack<>();
+        stack.push(start);
+        while (!stack.empty()) {
+            while (map.containsKey(stack.peek()) && !map.get(stack.peek()).isEmpty()){
+                PriorityQueue<String> queue = map.get(stack.peek());
+                stack.push(queue.poll());
+            }
+            result.add(0, stack.pop());
         }
-        result.add(0, start);
     }
 
     public static void main(String[] args) {
