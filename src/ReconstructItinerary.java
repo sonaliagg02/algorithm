@@ -10,10 +10,8 @@ public class ReconstructItinerary {
         for(List<String> cities: tickets){
             if(!map.containsKey(cities.get(0))){
                 map.put(cities.get(0), new PriorityQueue<>());
-                map.get(cities.get(0)).add(cities.get(1));
-            }else{
-                map.get(cities.get(0)).add(cities.get(1));
             }
+            map.get(cities.get(0)).add(cities.get(1));
         }
         performDFS("JFK", result, map);
         return result;
@@ -23,8 +21,9 @@ public class ReconstructItinerary {
         Stack<String> stack = new Stack<>();
         stack.push(start);
         while (!stack.empty()) {
-            while (map.containsKey(stack.peek()) && !map.get(stack.peek()).isEmpty()){
-                PriorityQueue<String> queue = map.get(stack.peek());
+            String top = stack.peek();
+            while (map.containsKey(top) && !map.get(top).isEmpty()){
+                PriorityQueue<String> queue = map.get(top);
                 stack.push(queue.poll());
             }
             result.add(0, stack.pop());
