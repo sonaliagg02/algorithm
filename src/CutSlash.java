@@ -44,8 +44,4 @@ public class CutSlash {
             performDFS(grid,i + arr[k],j + arr[k + 1]);
         }
     }
-
-    public static void main(String[] args) {
-
-    }
 }
