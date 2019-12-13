@@ -1,7 +1,7 @@
 public class IndianJob {
 
-    private static int[][] dp = new int[100][10001];
-    private static int[] tt = new int[101];
+    private static int[][] dp = new int[101][10001];
+    private static int[] timeArray = new int[101];
 
     static String indianJob(int g, int[] arr) {
         int n = arr.length;
@@ -9,8 +9,8 @@ public class IndianJob {
         dp[0][0] = 1;
 
         for(int i = 0; i < n; i++){
-            tt[i] = arr[i];
-            sum += tt[i];
+            timeArray[i] = arr[i];
+            sum += timeArray[i];
         }
 
         for(int j = 0; j < 10001; j++){
@@ -20,8 +20,8 @@ public class IndianJob {
         for(int i = 1; i <= n; i ++){
             System.arraycopy(dp[i - 1], 0, dp[i], 0, 10001);
             for(int j = 0; j < 10001; j ++){
-                if(j - tt[i] >= 0 ) {
-                    dp[i][j] |= dp[i - 1][j - tt[i]];
+                if(j - timeArray[i] >= 0 ) {
+                    dp[i][j] |= dp[i - 1][j - timeArray [i]];
                 }
             }
         }
