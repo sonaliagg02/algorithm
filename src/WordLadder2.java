@@ -6,12 +6,10 @@ public class WordLadder2 {
     private HashMap<String, Set<String>> graph = new HashMap<>();
 
     private List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
-
         List<String> sequence = new ArrayList<>();
         HashSet<String> dict = new HashSet<>(wordList);
         createGraph(beginWord, endWord, graph, dict);
         createSequence(beginWord, endWord, graph, sequence);
-
         return result;
     }
 
@@ -75,7 +73,7 @@ public class WordLadder2 {
             for(int c = 'a'; c <= 'z'; c++) {
                 char currentChar = ch[index];
                 ch[index] = (char)c;
-                String newString = Arrays.toString(ch);
+                String newString = new String(ch);
                 if(dictionary.contains(newString) && !newString.equals(current)) {
                     neigh.add(newString);
                 }
